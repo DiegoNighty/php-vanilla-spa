@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+html, body {
+    background: #000000;
+    font-family: 'Lato', sans-serif;
+    color: #ffff;
+}
+
+.avatar {
+    height: 360px;
+    width: 360px;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+}
