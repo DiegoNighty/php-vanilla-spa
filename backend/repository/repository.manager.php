@@ -10,9 +10,9 @@ include 'model/review.php';
 
 $mysqli = new mysqli(
     "localhost",
-    "id20378455_diegonighty",
-    "OMGtILIN1234!",
-    "id20378455_lyricnote"
+    "12341",
+    "4124124!",
+    "412412414"
 );
 
 if ($mysqli->connect_errno) {
