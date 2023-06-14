@@ -14,6 +14,7 @@ $router = new Router();
 $router->Page("home", "Home", false, true);
 $router->Page("test", "Test");
 
-$router->CurrentPage();
-
+echo Layout(
+    $router->CurrentPage()
+);
 

@@ -6,6 +6,14 @@ html, body {
     color: #ffff;
 }
 
+.logo-icon {
+    height: 64px;
+    width: 64px;
+    fill: #f47521;
+    display: block;
+    transition: fill .2s ease;
+}
+
 .avatar {
     height: 360px;
     width: 360px;

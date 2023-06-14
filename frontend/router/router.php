@@ -23,7 +23,7 @@ class Router {
         $this->routes['error'] = $pageRoute;
     }
 
-    public function CurrentPage(): void
+    public function CurrentPage(): string
     {
         $route = $_GET['route'] ?? $this->DEFAULT_ROUTE;
 
@@ -32,9 +32,9 @@ class Router {
                 echo '<dynamic>';
             }
 
-            echo $this->routes[$route]();
+            return $this->routes[$route]();
         } else {
-            echo $this->routes['error']();
+            return $this->routes['error']();
         }
     }
 }
