@@ -8,7 +8,8 @@ class UserSerializer implements ModelSerializer {
         $writer->write("TEXT", "password", $model->getPassword());
         $writer->write("VARCHAR(60)", "mail", $model->getEmail());
         $writer->write("TEXT", "avatarURL", $model->getAvatarURL());
-        $writer->write("TEXT", "preferences", join(", ", $model->getPreferences()));
+        $writer->write("TEXT", "preferences", $model->getPreferences());
+        $writer->write("TEXT", "role", $model->getRole());
     }
 
     function deserialize(array $result): Model
@@ -16,33 +17,39 @@ class UserSerializer implements ModelSerializer {
         return new User(
             $result["username"],
             $result["password"],
-            $result["email"],
+            $result["mail"],
             $result["avatarURL"],
-            $result["preferences"]
+            $result["preferences"],
+            $result["role"]
         );
     }
 }
 
 class User implements Model {
-    protected readonly String $username;
-    protected readonly String $password;
-    protected String $email;
-    protected String $avatarURL;
-    protected array $preferences;
+    public readonly String $username;
+    public readonly String $password;
+    public String $email;
+    public String $avatarURL;
+    public String $preferences;
+    public String $role;
 
     function __construct(
         String $username,
         String $password,
         String $email,
         String $avatarURL,
-        array $preferences
+        String $preferences,
+        String $role = "user"
     ) {
         $this->username = $username;
         $this->password = $password;
         $this->email = $email;
         $this->avatarURL = $avatarURL;
         $this->preferences = $preferences;
+        $this->role = $role;
     }
+
+
 
     /**
      * @return String
@@ -93,17 +100,17 @@ class User implements Model {
     }
 
     /**
-     * @return array
+     * @return string
      */
-    public function getPreferences(): array
+    public function getPreferences(): String
     {
         return $this->preferences;
     }
 
     /**
-     * @param array $preferences
+     * @param string $preferences
      */
-    public function setPreferences(array $preferences): void
+    public function setPreferences(String $preferences): void
     {
         $this->preferences = $preferences;
     }
@@ -111,5 +118,13 @@ class User implements Model {
     function getId(): string
     {
         return $this->username;
+    }
+
+    /**
+     * @return String
+     */
+    public function getRole(): string
+    {
+        return $this->role;
     }
 }

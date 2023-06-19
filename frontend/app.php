@@ -9,12 +9,15 @@ include_once 'component/layout.php';
 // Pages
 include_once 'pages/home.php';
 include_once 'pages/test.php';
+include_once 'pages/artist.submit.php';
+include_once 'pages/user.login.php';
 
 $router = new Router();
 $router->Page("home", "Home", false, true);
 $router->Page("test", "Test");
+$router->Page("artist/submit", "SubmitArtist");
+$router->Page("user/login", "UserLogin");
 
 echo Layout(
     $router->CurrentPage()
 );
-

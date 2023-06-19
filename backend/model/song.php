@@ -30,13 +30,13 @@ class SongSerializer implements ModelSerializer {
 }
 
 readonly class Song implements Model {
-    protected String $title;
-    protected String $artist;
-    protected String $album;
-    protected String $genre;
-    protected String $lyric;
-    protected int $releaseDate;
-    protected int $duration;
+    public String $title;
+    public String $artist;
+    public String $album;
+    public String $genre;
+    public String $lyric;
+    public int $releaseDate;
+    public int $duration;
 
     function __construct(
         String $title,

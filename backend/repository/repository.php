@@ -5,7 +5,7 @@ class Repository {
     protected mysqli $driver;
     protected String $table;
     protected String $idField;
-    protected ModelSerializer $serializer;
+    public ModelSerializer $serializer;
 
     function __construct(
         mysqli $driver,

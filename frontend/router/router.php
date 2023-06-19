@@ -34,7 +34,7 @@ class Router {
 
             return $this->routes[$route]();
         } else {
-            return $this->routes['error']();
+            return $this->routes[$this->DEFAULT_ROUTE]();
         }
     }
 }

@@ -1,12 +1,12 @@
 <?php
 
-include 'repository/repository.php';
-include 'repository/model.php';
-include 'model/artist.php';
-include 'model/event.php';
-include 'model/user.php';
-include 'model/song.php';
-include 'model/review.php';
+include_once 'repository.php';
+include_once 'model.php';
+include_once '../model/artist.php';
+include_once '../model/event.php';
+include_once '../model/user.php';
+include_once '../model/song.php';
+include_once '../model/review.php';
 
 $mysqli = new mysqli(
     "localhost",
@@ -16,41 +16,47 @@ $mysqli = new mysqli(
 );
 
 if ($mysqli->connect_errno) {
-    echo "Failed to connect to MySQL: " . $mysqli->connect_error;
-    exit();
+    echo json_encode(array(["error" => $mysqli->connect_error]));
 }
 
-$userRepo = new Repository(
+$repos = [];
+
+$repos["user"] = new Repository(
     $mysqli,
     "user",
     "username",
     new UserSerializer()
 );
 
-$artistRepo = new Repository(
+$repos["artist"] = new Repository(
     $mysqli,
     "artist",
     "name",
     new ArtistSerializer()
 );
 
-$eventRepo = new Repository(
+$repos["event"] = new Repository(
     $mysqli,
     "event",
     "artist",
     new EventSerializer()
 );
 
-$songRepo = new Repository(
+$repos["song"] = new Repository(
     $mysqli,
     "song",
     "title",
     new SongSerializer()
 );
 
-$reviewRepo = new Repository(
+$repos["review"] = new Repository(
     $mysqli,
-    "reviews",
+    "review",
     "username",
     new ReviewSerializer()
 );
+
+function getRepo($name): Repository {
+    global $repos;
+    return $repos[$name];
+}

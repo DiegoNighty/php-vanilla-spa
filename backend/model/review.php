@@ -26,11 +26,11 @@ class ReviewSerializer implements ModelSerializer {
 }
 
 class Review implements Model {
-    protected readonly String $username;
-    protected readonly String $songTitle;
-    protected String $content;
-    protected readonly int $date;
-    protected int $lastEditDate;
+    public readonly String $username;
+    public readonly String $songTitle;
+    public String $content;
+    public readonly int $date;
+    public int $lastEditDate;
 
     function __construct(
         String $username,

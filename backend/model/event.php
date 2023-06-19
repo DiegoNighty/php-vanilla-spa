@@ -23,10 +23,10 @@ class EventSerializer implements ModelSerializer {
 }
 
 readonly class Event implements Model {
-    protected String $artist;
-    protected String $location;
-    protected int $date;
-    protected String $type;
+    public String $artist;
+    public String $location;
+    public int $date;
+    public String $type;
 
     function __construct(
         String $artist,

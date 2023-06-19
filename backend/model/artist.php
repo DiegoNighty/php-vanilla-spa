@@ -20,9 +20,9 @@ class ArtistSerializer implements ModelSerializer {
 }
 
 readonly class Artist implements Model {
-    protected String $name;
-    protected String $avatarURL;
-    protected String $description;
+    public String $name;
+    public String $avatarURL;
+    public String $description;
 
     function __construct(
         String $name,

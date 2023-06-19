@@ -1,17 +1,23 @@
 <?php
-include_once 'logo.php';
+include_once 'header.nav.php';
+include_once 'footer.wave.php';
 
 function Layout(
     string $html
 ): string {
-    $logo = Logo();
+    $navBar = NavBar("LyricNote", [
+        new NavBarElement('#', 'Explora'),
+        new NavBarElement('#', 'Eventos'),
+    ]);
+
+    $wave = Wave();
     return "
         <header>
-           <div>$logo</div>
+           $navBar
         </header>
         <main>$html</main>
         <footer>
-            <p>Footer</p>
+            $wave
         </footer>
     ";
 }
