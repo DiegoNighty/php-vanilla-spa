@@ -1,4 +1,6 @@
 <?php
+include_once '../credential.php';
+
 class NavBarElement {
     public string $href;
     public string $text;
@@ -19,6 +21,14 @@ function NavBar(string $logo, array $links): string {
         $linksHtml .= "<li><a class='navbar-link' href='$link->href'>$link->text</a></li>";
     }
 
+    $sessionHtml = '';
+
+    if (getUser() == null) {
+        $sessionHtml = "<a class='navbar-link-login' href='user/login'>Iniciar sesión</a>";
+    } else {
+        $sessionHtml = "<a class='navbar-link-login' href='user/logout'>Cerrar sesión</a>";
+    }
+
     return "
       <link rel='stylesheet' href='../frontend/style/navbar.css'>
       <nav class='navbar'>
@@ -31,7 +41,7 @@ function NavBar(string $logo, array $links): string {
             </ul>
         </div>
         <div class='navbar-right'>
-            <a class='navbar-link-login' href='user/login'>Iniciar sesión</a>
+            $sessionHtml
         </div>
       </nav>
   ";

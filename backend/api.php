@@ -12,6 +12,27 @@ function Route($method, $route, callable $controller): void
     $routes[$method][$route] = $controller;
 }
 
+Route('POST', 'auth', function () {
+    $body = Body();
+    $username = $body['username'];
+    $password = $body['password'];
+
+    $user = getRepo("user")->find($username);
+    if ($user == null) {
+        Error("User not found");
+        return;
+    }
+
+    if ($user->password != $password) {
+        Error("Invalid password");
+        return;
+    }
+
+    echo json_encode([
+        "token" => parseToken($username, $password)
+    ]);
+});
+
 Route('GET', 'find', function () {
     $id = $_GET['id'];
     $repo = $_GET['repo'];
@@ -84,6 +105,23 @@ function Params(): array
 function Body(): mixed
 {
     return json_decode(file_get_contents("php://input"), true);
+}
+
+function parseToken($user, $pass): string {
+    return base64_encode($user . ":" . $pass);
+}
+
+function currentUser($body): User
+{
+    $token = $body['token'];
+    $credential = getCredential($token);
+    $username = $credential[0];
+    return getRepo("user")->find($username);
+}
+
+function getCredential($token): array {
+    $credential = base64_decode($token);
+    return explode(":", $credential);
 }
 
 execute();

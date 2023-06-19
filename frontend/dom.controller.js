@@ -51,7 +51,14 @@ function setCachedPage(route, apiRoute, browserRoute, html) {
 }
 
 function formatApiRoute(route) {
-    return 'app.php?route=' + route;
+    const routedApi = 'app.php?route=' + route
+    const token = localStorage.getItem('lyricnote_token')
+
+    if (token) {
+        return routedApi + '&token=' + token;
+    } else {
+        return routedApi;
+    }
 }
 
 function formatBrowserRoute(route) {
@@ -67,4 +74,9 @@ document.addEventListener('click', function (event) {
         event.preventDefault();
         loadPage(event.target.getAttribute('href').replace(".php", ""));
     }
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    const route = window.location.search.replace("?route=", "");
+    loadPage(route);
 });
