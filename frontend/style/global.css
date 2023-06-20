@@ -2,7 +2,7 @@
 
 html, body {
     font-family: 'Poppins', sans-serif;
-    background: #000000;
+    background: #000;
     display: flex;
     width: 100%;
     margin: 0 auto;
@@ -17,13 +17,34 @@ html, body {
 .logo-icon {
     color: #f47521;
     fill: #f47521;
+    text-shadow: 1px 1px 2px black;
     display: block;
     transition: fill .2s ease;
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.logo-icon-big {
+    color: #f47521;
+    fill: #f47521;
+    display: block;
+    transition: fill .2s ease;
+    font-size: 64px;
+    font-weight: bold;
+    text-decoration: none;
 }
 
 .avatar {
     height: 360px;
     width: 360px;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+}
+
+.avatar-small {
+    height: 64px;
+    width: 64px;
     border-radius: 50%;
     border: 1px solid #ccc;
 }

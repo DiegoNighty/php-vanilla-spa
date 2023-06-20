@@ -1,5 +1,5 @@
 <?php
-include_once '../credential.php';
+include_once 'credential.php';
 
 class NavBarElement {
     public string $href;
@@ -23,13 +23,27 @@ function NavBar(string $logo, array $links): string {
 
     $sessionHtml = '';
 
-    if (getUser() == null) {
+    $logoutAction = "
+        <script> 
+        function logout() {
+            localStorage.removeItem('lyricnote_token')    
+        }
+        </script>
+    ";
+
+    $user = getUser();
+
+    if ($user == null) {
         $sessionHtml = "<a class='navbar-link-login' href='user/login'>Iniciar sesión</a>";
     } else {
-        $sessionHtml = "<a class='navbar-link-login' href='user/logout'>Cerrar sesión</a>";
+        $username = $user["username"];
+        $avatarURL = $user["avatarURL"];
+        $img = "<img class='avatar-small' src='$avatarURL' alt='Imagen de usuario de $username'>";
+        $sessionHtml = "<a class='navbar-link-login' onclick='logout()' href='home'>$img</a>";
     }
 
     return "
+      $logoutAction
       <link rel='stylesheet' href='../frontend/style/navbar.css'>
       <nav class='navbar'>
         <div class='navbar-logo'>
@@ -46,3 +60,4 @@ function NavBar(string $logo, array $links): string {
       </nav>
   ";
 }
+

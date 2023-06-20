@@ -35,6 +35,10 @@ function setPage(route, apiRoute, browserRoute) {
                     newElementDOM.id = 'app';
                     newElementDOM.innerHTML = text;
 
+                    const scriptElement = document.createElement("script");
+                    analyzeScript(text, scriptElement);
+                    newElementDOM.appendChild(scriptElement);
+
                     page.appendChild(newElementDOM);
 
                     if (!isDynamic(text)) {
@@ -43,6 +47,20 @@ function setPage(route, apiRoute, browserRoute) {
                 })
                 .catch(err => console.log(err));
         }).catch(err => console.log(err));
+}
+
+function analyzeScript(htmlString, scriptElement) {
+    const scriptRegex = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi;
+    const scriptTags = htmlString.match(scriptRegex);
+
+    if (!scriptTags) {
+        return;
+    }
+
+    for (let i = 0; i < scriptTags.length; i++) {
+        const scriptContent = scriptTags[i].replace(/<\/?script>/g, '');
+        scriptElement.textContent += scriptContent
+    }
 }
 
 function setCachedPage(route, apiRoute, browserRoute, html) {
@@ -70,9 +88,18 @@ function isDynamic(text) {
 }
 
 document.addEventListener('click', function (event) {
-    if (event.target.matches('a')) {
+    let target = event.target
+
+    if (target.matches('a')) {
         event.preventDefault();
-        loadPage(event.target.getAttribute('href').replace(".php", ""));
+        loadPage(target.getAttribute('href').replace(".php", ""));
+        return;
+    }
+
+    let parent = target.parentElement
+    if (parent && parent.matches('a')) {
+        event.preventDefault()
+        loadPage(parent.getAttribute('href').replace(".php", ""));
     }
 });
 

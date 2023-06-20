@@ -1,0 +1,41 @@
+.hero {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: radial-gradient(circle at 10% 20%, rgb(255, 197, 61) 0%, rgb(255, 94, 7) 90%);
+}
+
+.hero h2 {
+    color: #141519;
+    text-shadow: 1px 1px 2px pink;
+    margin: 20px 0 auto;
+}
+
+.hero .slogan {
+    margin: 0 auto;
+    padding: 0 0 20px 0;
+}
+
+.features {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 50px 0;
+}
+
+.features .feature {
+    margin: 0 20px;
+}
+
+.features .feature h3 {
+    margin: 20px 0;
+}
+
+.features .feature p {
+    margin: 0 0 20px 0;
+}

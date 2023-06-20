@@ -1,6 +1,5 @@
 <?php
 include_once 'header.nav.php';
-include_once 'footer.wave.php';
 
 function Layout(
     string $html
@@ -10,14 +9,10 @@ function Layout(
         new NavBarElement('#', 'Eventos'),
     ]);
 
-    $wave = Wave();
     return "
         <header>
            $navBar
         </header>
         <main>$html</main>
-        <footer>
-            $wave
-        </footer>
     ";
 }

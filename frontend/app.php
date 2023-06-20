@@ -15,8 +15,8 @@ include_once 'pages/user.login.php';
 $router = new Router();
 $router->Page("home", "Home", false, true);
 $router->Page("test", "Test");
-$router->Page("artist/submit", "SubmitArtist");
-$router->Page("user/login", "UserLogin");
+$router->Page("artist/submit", "SubmitArtist", true);
+$router->Page("user/login", "UserLogin", true);
 
 echo Layout(
     $router->CurrentPage()

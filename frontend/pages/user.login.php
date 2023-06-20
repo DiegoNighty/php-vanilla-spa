@@ -47,7 +47,7 @@ function UserLoginAction(): string {
 
 function UserLogin(): string {
     $action = UserLoginAction();
-    
+
     return "
     <link rel='stylesheet' href='http://diegonoches.ninja/lyricnote/web/frontend/style/login.css'>
     <div class='login-container'>
